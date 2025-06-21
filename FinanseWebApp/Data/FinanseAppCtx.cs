@@ -7,7 +7,7 @@ namespace FinanseWebApp.Data
     {
         public FinanseAppCtx(DbContextOptions<FinanseAppCtx> options) : base(options) { }   
         
-        DbSet<Expense> Expenses { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
         
     }
 }
