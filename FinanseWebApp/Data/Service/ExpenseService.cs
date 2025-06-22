@@ -21,5 +21,17 @@ namespace FinanseWebApp.Data.Service
             var expenses = await _ctx.Expenses.ToListAsync();
             return expenses;
         }
+
+        public IQueryable GetChartData()
+        {
+            var data = _ctx.Expenses
+                .GroupBy(e => e.Category)
+                .Select(g => new
+                {
+                    Category = g.Key,
+                    Total = g.Sum(e => e.Amount)
+                });
+            return data;
+        }
     }
 }

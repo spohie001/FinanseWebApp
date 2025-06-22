@@ -1,4 +1,5 @@
 ﻿using FinanseWebApp.Models;
+using System.Linq;
 
 namespace FinanseWebApp.Data.Service
 {
@@ -6,5 +7,6 @@ namespace FinanseWebApp.Data.Service
     {
         Task<IEnumerable<Expense>> GetAll();
         Task Add(Expense expense);
+        IQueryable GetChartData();
     }
 }
