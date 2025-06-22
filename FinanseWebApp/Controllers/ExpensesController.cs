@@ -1,6 +1,7 @@
 ﻿using FinanseWebApp.Data;
 using FinanseWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanseWebApp.Controllers
 {
@@ -11,9 +12,9 @@ namespace FinanseWebApp.Controllers
         {
             _ctx = ctx;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var expenses = _ctx.Expenses.ToList();
+            var expenses = await _ctx.Expenses.ToListAsync();
             return View(expenses);
         }
         public IActionResult Create()
@@ -21,12 +22,12 @@ namespace FinanseWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Expense expense)
+        public async Task<IActionResult> Create(Expense expense)
         {
             if(ModelState.IsValid)
             {
                 _ctx.Expenses.Add(expense);
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(expense);
