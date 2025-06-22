@@ -1,4 +1,5 @@
 using FinanseWebApp.Data;
+using FinanseWebApp.Data.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FinanseAppCtx>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddScoped<IExpensesService, ExpenseService>();
 
 var app = builder.Build();
 
